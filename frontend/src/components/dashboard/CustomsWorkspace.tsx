@@ -13,6 +13,7 @@ import {
   Stamp,
 } from "lucide-react";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
+import { BlockchainProofBadge } from "@/components/ui/BlockchainProofBadge";
 import { Spinner } from "@/components/ui/Spinner";
 import { useToast } from "@/components/ui/ToastProvider";
 import { getStoredToken } from "@/lib/auth-storage";
@@ -287,6 +288,12 @@ function DocumentPanel({ documents }: { documents: CustomsDocumentCheck[] }) {
                   Timestamp: {formatDateTime(doc.uploaded_at)}
                 </span>
               </div>
+              <div className="mt-3">
+                <BlockchainProofBadge
+                  status={doc.anchor_status}
+                  txHash={doc.blockchain_tx_hash}
+                />
+              </div>
             </div>
           ))
         )}
@@ -334,6 +341,10 @@ function Timeline({ events }: { events: ShipmentEvent[] }) {
                 <span className="rounded-full border border-ec-border bg-ec-card px-2.5 py-1">
                   {shortHash(event.event_hash)}
                 </span>
+                <BlockchainProofBadge
+                  status={event.anchor_status}
+                  txHash={event.blockchain_tx_hash}
+                />
               </div>
             </div>
           ))
