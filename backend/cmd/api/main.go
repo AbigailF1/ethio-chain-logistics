@@ -22,6 +22,7 @@ import (
 )
 
 func main() {
+	log.Println("API starting up...")
 	cfg, err := config.Load()
 	if err != nil {
 		log.Fatalf("config: %v", err)
@@ -34,6 +35,7 @@ func main() {
 		log.Fatalf("database: %v", err)
 	}
 	defer pool.Close()
+	log.Println("database connection successful")
 
 	healthUC := usecase.NewHealthUsecase(pool)
 
