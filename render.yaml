@@ -8,8 +8,6 @@ services:
     branch: deploy
     rootDir: backend
     dockerfilePath: backend/Dockerfile
-    startCommand: bash -lc "API_PORT=$PORT /app/api"
-    releaseCommand: make backend-migrate-up
     healthCheckPath: /health
     envVars:
       - key: DATABASE_URL

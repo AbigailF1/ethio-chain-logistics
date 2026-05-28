@@ -20,10 +20,14 @@ FROM alpine:3.20 AS runtime
 RUN apk add --no-cache ca-certificates tzdata
 WORKDIR /app
 COPY --from=build /out/api ./api
+COPY --from=goose-build /go/bin/goose /usr/local/bin/goose
+COPY --from=goose-build /src/migrations ./migrations
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
 RUN mkdir -p /app/uploads && chown -R nobody:nobody /app/uploads
 USER nobody
 EXPOSE 8080
-ENTRYPOINT ["/app/api"]
+ENTRYPOINT ["/app/start.sh"]
 
 FROM alpine:3.20 AS migrate
 RUN apk add --no-cache ca-certificates
