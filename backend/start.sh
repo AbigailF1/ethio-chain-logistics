@@ -9,6 +9,7 @@ fi
 
 export GOOSE_DRIVER=postgres
 export GOOSE_DBSTRING="$DATABASE_URL"
+export GOOSE_MIGRATION_DIR=/app/migrations
 
-goose -dir /app/migrations up
+goose up
 exec /app/api
