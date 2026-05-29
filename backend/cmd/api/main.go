@@ -54,7 +54,7 @@ func main() {
 	authUC := usecase.NewAuthUsecase(userRepo, docRepo, emailSender, cfg.JWTSecret)
 	shipmentUC := usecase.NewShipmentUsecase(shipmentRepo)
 	authHandlers := controller.NewAuthHandlers(authUC, fileStore)
-	adminHandlers := controller.NewAdminHandlers(authUC, cfg.UploadDir)
+	adminHandlers := controller.NewAdminHandlers(authUC, fileStore)
 	importerHandlers := controller.NewImporterHandlers(shipmentUC, fileStore)
 	sellerRepo := repository.NewSellerRepo(pool)
 	sellerUC := usecase.NewSellerUsecase(sellerRepo)
